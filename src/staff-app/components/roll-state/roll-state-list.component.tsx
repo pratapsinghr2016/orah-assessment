@@ -1,24 +1,28 @@
-import React from "react"
-import styled from "styled-components"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { RollStateIcon } from "staff-app/components/roll-state/roll-state-icon.component"
-import { Spacing, FontWeight } from "shared/styles/styles"
-import { RolllStateType } from "shared/models/roll"
-import { Avatar } from "@material-ui/core"
-import { Colors } from "shared/styles/colors"
+import React from "react";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { RollStateIcon } from "staff-app/components/roll-state/roll-state-icon.component";
+import { Spacing, FontWeight } from "shared/styles/styles";
+import { Avatar } from "@material-ui/core";
+import { Colors } from "shared/styles/colors";
 
 interface Props {
-  stateList: StateList[]
-  onItemClick: (type: ItemType) => void
-  size?: number
-  selectedRollType: string
+  stateList: StateList[];
+  onItemClick: (type: ItemType) => void;
+  size?: number;
+  selectedRollType: string;
 }
-export const RollStateList: React.FC<Props> = ({ stateList, size = 14, onItemClick, selectedRollType }) => {
+export const RollStateList: React.FC<Props> = ({
+  stateList,
+  size = 14,
+  onItemClick,
+  selectedRollType,
+}) => {
   const onClick = (type: ItemType) => {
     if (onItemClick) {
-      onItemClick(type)
+      onItemClick(type);
     }
-  }
+  };
 
   return (
     <S.ListContainer>
@@ -27,29 +31,39 @@ export const RollStateList: React.FC<Props> = ({ stateList, size = 14, onItemCli
           return (
             <S.ListItem key={i}>
               <S.ListItemDetail>
-                <S.Avatar style={{ backgroundColor: Colors.blue.base, border: "2px solid", cursor: "not-allowed" }}>
+                <S.Avatar
+                  style={{
+                    backgroundColor: Colors.blue.base,
+                    border: "2px solid",
+                    cursor: "not-allowed",
+                  }}
+                >
                   <FontAwesomeIcon icon="users" size="lg" />
                 </S.Avatar>
                 <p>{s.count}</p>
               </S.ListItemDetail>
               <strong>{s.type}</strong>
             </S.ListItem>
-          )
+          );
         }
 
         return (
           <S.ListItem key={i}>
             <S.ListItemDetail>
-              <RollStateIcon selectedRollType={selectedRollType} rollMode={s.type} onClick={() => onClick(s.type)} />
+              <RollStateIcon
+                selectedRollType={selectedRollType}
+                rollMode={s.type}
+                onClick={() => onClick(s.type)}
+              />
               <p>{s.count}</p>
             </S.ListItemDetail>
             <strong>{s.type}</strong>
           </S.ListItem>
-        )
+        );
       })}
     </S.ListContainer>
-  )
-}
+  );
+};
 
 const S = {
   ListContainer: styled.div`
@@ -79,11 +93,11 @@ const S = {
   Avatar: styled(Avatar)`
     cursor: pointer;
   `,
-}
+};
 
 interface StateList {
-  type: ItemType
-  count: number
+  type: ItemType;
+  count: number;
 }
 
-type ItemType = RolllStateType | "all"
+type ItemType = any | "all";

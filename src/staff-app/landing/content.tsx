@@ -1,5 +1,5 @@
-import React from "react"
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
 
 const S = {
   Section: styled.section`
@@ -39,7 +39,7 @@ const S = {
     display: flex;
     flex-direction: column;
   `,
-}
+};
 
 const Content = () => {
   return (
@@ -51,10 +51,19 @@ const Content = () => {
       </h2>
 
       <S.Quote>
-        To create a demo application highlighting the basic features which are required in an academic atmosphere like a school, college, or university This application will
-        include local data management and using that we&#39;ll implement the roll management mini application better for the B2B business modal Showcase best development mannerisms
-        and coding style which could be a replica of a production-level application Showcase some optimizing front-end mechanism like
-        <strong> debouncing, caching, lazy-loading, global state management &amp; pagination</strong>. Following a scalable design system
+        To create a demo application highlighting the basic features which are
+        required in an academic atmosphere like a school, college, or university
+        This application will include local data management and using that
+        we&#39;ll implement the roll management mini application better for the
+        B2B business modal Showcase best development mannerisms and coding style
+        which could be a replica of a production-level application Showcase some
+        optimizing front-end mechanism like
+        <strong>
+          {" "}
+          debouncing, caching, lazy-loading, global state management &amp;
+          pagination
+        </strong>
+        . Following a scalable design system
       </S.Quote>
 
       <h2>
@@ -96,7 +105,9 @@ const Content = () => {
             Redux-js toolkit
             <ul>
               <li>
-                To maintain a global state for storage &amp; retrieving the consistency in data across the application depending on redux subscription to the respective component
+                To maintain a global state for storage &amp; retrieving the
+                consistency in data across the application depending on redux
+                subscription to the respective component
               </li>
             </ul>
           </li>
@@ -106,26 +117,49 @@ const Content = () => {
         <strong>General User-flow</strong>
       </h2>
       <S.ImageContainer>
-        <a target="_blank" href="https://www.linkpicture.com/view.php?img=LPic640dc676474af1691639560">
-          <img style={{ border: "5px solid #333", borderRadius: 20 }} width={"60%"} height={"25%"} src="https://www.linkpicture.com/q/Seq-diagram-Seq-1.jpg" alt="image" />
+        <a
+          target="_blank"
+          href="https://www.linkpicture.com/view.php?img=LPic640dc676474af1691639560"
+        >
+          <img
+            style={{ border: "5px solid #333", borderRadius: 20 }}
+            width={"60%"}
+            height={"25%"}
+            src="https://www.linkpicture.com/q/Seq-diagram-Seq-1.jpg"
+            alt="image"
+          />
         </a>
       </S.ImageContainer>
       <h2>
         <strong>Profiler performance report</strong>
       </h2>
       <S.ImageContainer>
-        <a target="_blank" href="https://www.linkpicture.com/q/ssssssssssss.jpg">
-          <img style={{ border: "5px solid #333", borderRadius: 20 }} width={"80%"} height={"30%"} src="https://www.linkpicture.com/q/ssssssssssss.jpg" alt="image" />
+        <a
+          target="_blank"
+          href="https://www.linkpicture.com/q/ssssssssssss.jpg"
+        >
+          <img
+            style={{ border: "5px solid #333", borderRadius: 20 }}
+            width={"80%"}
+            height={"30%"}
+            src="https://www.linkpicture.com/q/ssssssssssss.jpg"
+            alt="image"
+          />
         </a>
       </S.ImageContainer>
       <h3>
-        <strong>Points to be noted from the above profiler&#39;s report:</strong>
+        <strong>
+          Points to be noted from the above profiler&#39;s report:
+        </strong>
       </h3>
       <S.Quote>
         <ul>
           <li>
-            It&#39;s lab data hence the ground data will be even more lagging because of certain other performance-affecting parameters like server speed, user location, device
-            &amp; device configuration, transaction cost due to ISP in the respective geographical location, etc.
+            It&#39;s lab data hence the ground data will be even more lagging
+            because of certain other performance-affecting parameters like
+            server speed, user location, device &amp; device configuration,
+            transaction cost due to ISP in the respective geographical location,
+            etc.
           </li>
           <li>
             The above visible that
@@ -135,17 +169,27 @@ const Content = () => {
             </ul>
           </li>
           <li>
-            An ideal render time should be ~33.33 ms because of the human eye can not notice the glitch unless the pixel paint process is for 30 FPS. This can be improved with the
-            SSR technique, but CSR is still fine for it because of the continuous user interaction involved with an application.
+            An ideal render time should be ~33.33 ms because of the human eye
+            can not notice the glitch unless the pixel paint process is for 30
+            FPS. This can be improved with the SSR technique, but CSR is still
+            fine for it because of the continuous user interaction involved with
+            an application.
           </li>
           <li>
-            But as per the performance matrix visible in the above image, the majority highlight is the Material UI component (V4), and that too specifically with
-            <code>withStyles()</code> which is an API to use MUI&#39;s style engine. The style engine is improved with V5. For more details
-            <a href="https://mui.com/material-ui/migration/migration-v4/">Click here</a>
+            But as per the performance matrix visible in the above image, the
+            majority highlight is the Material UI component (V4), and that too
+            specifically with
+            <code>withStyles()</code> which is an API to use MUI&#39;s style
+            engine. The style engine is improved with V5. For more details
+            <a href="https://mui.com/material-ui/migration/migration-v4/">
+              Click here
+            </a>
           </li>
           <li>
-            In my opinion, we can fix that by just relying on <a href="https://styled-components.com/">styled-components</a> as it will reduce bundle size, optimize CSR &amp;
-            brings a lightweight design system tool that is entirely in the control of the developer.
+            In my opinion, we can fix that by just relying on{" "}
+            <a href="https://styled-components.com/">styled-components</a> as it
+            will reduce bundle size, optimize CSR &amp; brings a lightweight
+            design system tool that is entirely in the control of the developer.
           </li>
         </ul>
       </S.Quote>
@@ -162,11 +206,21 @@ const Content = () => {
       </h2>
       <S.Quote>
         <ul>
-          <li>Folder structure is not optimum i.e atomic structure can be implemented</li>
-          <li>Module export can be improved with a single point of entry in a file</li>
+          <li>
+            Folder structure is not optimum i.e atomic structure can be
+            implemented
+          </li>
+          <li>
+            Module export can be improved with a single point of entry in a file
+          </li>
           <li>More modularity can be obtained</li>
           <li>Performance can be improved</li>
-          <li>If the application would have a chance to scale then API caching by RTK could be more helpful</li>
+          <li>Write test cases</li>
+          <li>Improve static typing</li>
+          <li>
+            If the application would have a chance to scale then API caching by
+            RTK could be more helpful
+          </li>
         </ul>
       </S.Quote>
       <h2>
@@ -188,14 +242,20 @@ const Content = () => {
         <em>Name: Rajat Pratap Singh</em>
         <em>E-mail: pratapsinghr2016@gmail.com</em>
         <em>
-          Linkedin: <a href="https://www.linkedin.com/in/rajat-pratap-singh-sse/">Click here</a>
+          Linkedin:{" "}
+          <a href="https://www.linkedin.com/in/rajat-pratap-singh-sse/">
+            Click here
+          </a>
         </em>
         <em>
-          Resume:<a href="https://drive.google.com/file/d/1pik0LQJyyrRmlpT_U_fPuulAvap4OW27/view?usp=sharing">Click here</a>
+          Resume:
+          <a href="https://drive.google.com/file/d/1pik0LQJyyrRmlpT_U_fPuulAvap4OW27/view?usp=sharing">
+            Click here
+          </a>
         </em>
       </S.Quote>
     </S.Section>
-  )
-}
+  );
+};
 
-export default Content
+export default Content;
