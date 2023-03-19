@@ -1,28 +1,28 @@
-import React, { Component, ReactNode } from "react"
+import React, { Component, ReactNode } from "react";
 
 interface Props {
-  children: ReactNode
+  children: ReactNode;
 }
 
 interface State {
-  hasError: boolean
+  hasError: boolean;
 }
 
 class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
-    super(props)
-    this.state = { hasError: false }
+    super(props);
+    this.state = { hasError: false };
   }
 
   static getDerivedStateFromError(): State {
     // Update state so the next render will show the fallback UI.
-    return { hasError: true }
+    return { hasError: true };
   }
 
   componentDidCatch(error: object, errorInfo: React.ErrorInfo): void {
-    console.error("error: " + error)
-    console.error("errorInfo: " + JSON.stringify(errorInfo))
-    console.error("componentStack: " + errorInfo.componentStack)
+    console.error("error: " + error);
+    console.error("errorInfo: " + JSON.stringify(errorInfo));
+    console.error("componentStack: " + errorInfo.componentStack);
   }
 
   render(): ReactNode {
@@ -32,11 +32,11 @@ class ErrorBoundary extends Component<Props, State> {
           <h1>Something went wrong.</h1>
           <button onClick={() => location.reload()}>Refresh</button>
         </div>
-      )
+      );
     }
 
-    return this.props.children
+    return this.props.children;
   }
 }
 
-export default ErrorBoundary
+export default ErrorBoundary;

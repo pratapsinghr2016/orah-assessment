@@ -1,26 +1,33 @@
-import React, { useEffect } from "react"
-import styled from "styled-components"
-import { BorderRadius, Spacing } from "shared/styles/styles"
-import { Images } from "assets/images"
-import { getBgColor } from "shared/helpers/data-generation"
-import { useAppDispatch, useAppSelector } from "shared/hooks/redux"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { CenteredContainer } from "shared/components/centered-container/centered-container.component"
-import { fetchActivities, getAllActivities } from "./activity.page.slice"
-import { Person } from "shared/models/person"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Images } from "assets/images";
+import React, { useEffect } from "react";
+import { CenteredContainer } from "shared/components/centered-container/centered-container.component";
+import { getBgColor } from "shared/helpers/data-generation";
+import { useAppDispatch, useAppSelector } from "shared/hooks/redux";
+import { Person } from "shared/models/person";
+import { BorderRadius, Spacing } from "shared/styles/styles";
+import styled from "styled-components";
+import { fetchActivities, getAllActivities } from "./activity.page.slice";
 
 export const ActivityPage: React.FC = () => {
-  const dispatch = useAppDispatch()
-  const { activities, isLoading, hasError } = useAppSelector(getAllActivities)
+  const dispatch = useAppDispatch();
+  const { activities, isLoading, hasError } = useAppSelector(getAllActivities);
 
   useEffect(() => {
-    dispatch(fetchActivities())
-  }, [])
+    dispatch(fetchActivities());
+  }, []);
 
   return (
     <S.Container>
       {isLoading && (
-        <div style={{ display: "flex", margin: "auto", alignItems: "center", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            margin: "auto",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <S.SpinnerContainer>
             <FontAwesomeIcon icon="spinner" size="5x" spin />
           </S.SpinnerContainer>
@@ -29,28 +36,44 @@ export const ActivityPage: React.FC = () => {
 
       {!isLoading &&
         activities &&
-        activities.map(({ id, gender, first_name: firstName, last_name: lastName, age, roll, grade, parent }: Person) => (
-          <S.CardContainer key={id} style={{ borderLeft: `15px solid ${getBgColor(roll)}` }}>
-            <S.Avatar url={gender === "m" ? Images.male : Images.female}></S.Avatar>
-            <div>
+        activities.map(
+          ({
+            id,
+            gender,
+            first_name: firstName,
+            last_name: lastName,
+            age,
+            roll,
+            grade,
+            parent,
+          }: Person) => (
+            <S.CardContainer
+              key={id}
+              style={{ borderLeft: `15px solid ${getBgColor(roll)}` }}
+            >
+              <S.Avatar
+                url={gender === "m" ? Images.male : Images.female}
+              ></S.Avatar>
               <div>
-                <S.Title> Name:</S.Title> {firstName + " " + lastName}
+                <div>
+                  <S.Title> Name:</S.Title> {firstName + " " + lastName}
+                </div>
+                <div>
+                  <S.Title> Age:</S.Title> {age}
+                </div>
+                <div>
+                  <S.Title> Grade: </S.Title> {grade}
+                </div>
+                <div>
+                  <S.Title> Parent:</S.Title> {parent}
+                </div>
+                <div>
+                  <S.Title>Roll:</S.Title> {roll}
+                </div>
               </div>
-              <div>
-                <S.Title> Age:</S.Title> {age}
-              </div>
-              <div>
-                <S.Title> Grade: </S.Title> {grade}
-              </div>
-              <div>
-                <S.Title> Parent:</S.Title> {parent}
-              </div>
-              <div>
-                <S.Title>Roll:</S.Title> {roll}
-              </div>
-            </div>
-          </S.CardContainer>
-        ))}
+            </S.CardContainer>
+          )
+        )}
 
       {hasError && (
         <CenteredContainer>
@@ -58,8 +81,8 @@ export const ActivityPage: React.FC = () => {
         </CenteredContainer>
       )}
     </S.Container>
-  )
-}
+  );
+};
 
 const S = {
   Container: styled.div`
@@ -113,4 +136,4 @@ const S = {
     align-items: center;
     justify-content: center;
   `,
-}
+};

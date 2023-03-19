@@ -1,20 +1,26 @@
-import { Images } from "assets/images"
-import React from "react"
-import { Person, PersonHelper, DefaultPropTypes } from "shared/models/person"
-import { Colors } from "shared/styles/colors"
-import { BorderRadius, FontWeight, Spacing } from "shared/styles/styles"
-import { RollStateSwitcher } from "staff-app/components/roll-state/roll-state-switcher.component"
-import styled from "styled-components"
+import { Images } from "assets/images";
+import React from "react";
+import { DefaultPropTypes, Person, PersonHelper } from "shared/models/person";
+import { Colors } from "shared/styles/colors";
+import { BorderRadius, FontWeight, Spacing } from "shared/styles/styles";
+import { RollStateSwitcher } from "staff-app/components/roll-state/roll-state-switcher.component";
+import styled from "styled-components";
 
 interface Props {
-  rollMode: string
-  student: Person
-  tableProps: DefaultPropTypes
+  rollMode: string;
+  student: Person;
+  tableProps: DefaultPropTypes;
 }
-export const StudentListTile: React.FC<Props> = ({ rollMode, student, tableProps }) => {
+export const StudentListTile: React.FC<Props> = ({
+  rollMode,
+  student,
+  tableProps,
+}) => {
   return (
     <S.Container>
-      <S.Avatar url={student.gender === "m" ? Images.male : Images.female}></S.Avatar>
+      <S.Avatar
+        url={student.gender === "m" ? Images.male : Images.female}
+      ></S.Avatar>
       <S.Content>
         <S.ColItem>
           <p>{PersonHelper.getFullName(student)}</p>
@@ -33,11 +39,15 @@ export const StudentListTile: React.FC<Props> = ({ rollMode, student, tableProps
       </S.Content>
 
       <S.Roll>
-        <RollStateSwitcher tableProps={tableProps} studentDetail={student} rollMode={rollMode} />
+        <RollStateSwitcher
+          tableProps={tableProps}
+          studentDetail={student}
+          rollMode={rollMode}
+        />
       </S.Roll>
     </S.Container>
-  )
-}
+  );
+};
 
 const S = {
   Container: styled.div`
@@ -81,4 +91,4 @@ const S = {
     align-items: center;
     margin-right: ${Spacing.u4};
   `,
-}
+};

@@ -1,28 +1,28 @@
-import React from "react"
-import styled from "styled-components"
-import Button from "@material-ui/core/Button"
-import { BorderRadius, Spacing } from "shared/styles/styles"
-import { RollStateList } from "staff-app/components/roll-state/roll-state-list.component"
-import { Colors } from "shared/styles/colors"
+import Button from "@material-ui/core/Button";
+import React from "react";
+import { Colors } from "shared/styles/colors";
+import { BorderRadius } from "shared/styles/styles";
+import { RollStateList } from "staff-app/components/roll-state/roll-state-list.component";
+import styled from "styled-components";
 
-export type ActiveRollAction = "filter" | "exit"
+export type ActiveRollAction = "filter" | "exit";
 interface Props {
-  isActive: boolean
-  allRolls: number
-  selectedRollType: string
+  isActive: boolean;
+  allRolls: number;
+  selectedRollType: string;
   counts: {
-    total: number
-    present: number
-    late: number
-    absent: number
-    unRolled: number
-  }
-  onItemClick: (value: string) => void
-  setModalOpen: (value: boolean) => void
+    total: number;
+    present: number;
+    late: number;
+    absent: number;
+    unRolled: number;
+  };
+  onItemClick: (value: string) => void;
+  setModalOpen: (value: boolean) => void;
 }
 
 export const ActiveRollOverlay: React.FC<Props> = (props) => {
-  const { counts, onItemClick, selectedRollType, setModalOpen } = props
+  const { counts, onItemClick, selectedRollType, setModalOpen } = props;
 
   return (
     <S.Content>
@@ -44,8 +44,8 @@ export const ActiveRollOverlay: React.FC<Props> = (props) => {
         <S.Button onClick={() => setModalOpen(true)}>Complete</S.Button>
       </S.ActionContainer>
     </S.Content>
-  )
-}
+  );
+};
 
 const S = {
   Overlay: styled.div<{ isActive: boolean }>`
@@ -84,4 +84,4 @@ const S = {
       padding: 2px !important;
     }
   `,
-}
+};

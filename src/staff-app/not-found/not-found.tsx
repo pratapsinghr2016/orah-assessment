@@ -1,6 +1,6 @@
-import React from "react"
-import { Colors } from "shared/styles/colors"
-import styled from "styled-components"
+import React from "react";
+import { Colors } from "shared/styles/colors";
+import styled from "styled-components";
 
 const S = {
   Container: styled.div`
@@ -24,7 +24,7 @@ const S = {
       border: 2px solid ${Colors.blue.base};
     }
   `,
-}
+};
 
 const PageNotFound = () => {
   return (
@@ -32,7 +32,7 @@ const PageNotFound = () => {
       <h1>Page Not Found</h1>
       <a href="/">Home Page</a>
     </S.Container>
-  )
-}
+  );
+};
 
-export default PageNotFound
+export default PageNotFound;

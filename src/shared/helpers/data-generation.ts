@@ -1,4 +1,4 @@
-import { getRandomInt, generateRange } from "shared/helpers/math-utils";
+import { generateRange, getRandomInt } from "shared/helpers/math-utils";
 import { sortBy } from "shared/helpers/performance-utils";
 
 const nameTokens = [

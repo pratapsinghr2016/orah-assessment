@@ -1,14 +1,13 @@
-import avatar from "./images/avatar.png"
-import asc from "./images/asc.svg"
-import dsc from "./images/dsc.svg"
-import ascDark from "./images/asc-dark.svg"
-import dscDark from "./images/dsc-dark.svg"
-import search from "./images/search.svg"
-import male from "./images/male.svg"
-import female from "./images/female.svg"
-import nullIcon from "./images/null.svg"
-
-import logo from "./images/logo.png"
+import ascDark from "./images/asc-dark.svg";
+import asc from "./images/asc.svg";
+import avatar from "./images/avatar.png";
+import dscDark from "./images/dsc-dark.svg";
+import dsc from "./images/dsc.svg";
+import female from "./images/female.svg";
+import male from "./images/male.svg";
+import nullIcon from "./images/null.svg";
+import search from "./images/search.svg";
+import logo from "./images/logo.png";
 
 export const Images = {
   avatar: avatar as string,
@@ -21,4 +20,4 @@ export const Images = {
   female: female as string,
   nullIcon: nullIcon as string,
   logo: logo as string,
-}
+};

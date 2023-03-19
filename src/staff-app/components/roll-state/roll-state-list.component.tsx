@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { RollStateIcon } from "staff-app/components/roll-state/roll-state-icon.component";
-import { Spacing, FontWeight } from "shared/styles/styles";
 import { Avatar } from "@material-ui/core";
+import React from "react";
 import { Colors } from "shared/styles/colors";
+import { FontWeight, Spacing } from "shared/styles/styles";
+import { RollStateIcon } from "staff-app/components/roll-state/roll-state-icon.component";
+import styled from "styled-components";
 
 interface Props {
   stateList: StateList[];

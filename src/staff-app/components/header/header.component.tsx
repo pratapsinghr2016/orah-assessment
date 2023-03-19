@@ -1,7 +1,7 @@
-import React from "react"
-import { NavLink } from "react-router-dom"
-import { Colors } from "shared/styles/colors"
-import styled from "styled-components"
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Colors } from "shared/styles/colors";
+import styled from "styled-components";
 
 export const Header: React.FC = () => {
   return (
@@ -12,8 +12,8 @@ export const Header: React.FC = () => {
         <NavItem to="/staff/activity">Activity</NavItem>
       </S.HeaderItems>
     </S.Header>
-  )
-}
+  );
+};
 
 const NavItem: React.FC<{ to: string }> = (props) => {
   const activeStyle = ({ isActive }: { isActive: boolean }) => ({
@@ -24,13 +24,13 @@ const NavItem: React.FC<{ to: string }> = (props) => {
     padding: "18px 20px 17px",
     backgroundColor: isActive ? "#fff" : Colors.blue.base,
     borderRadius: "5px",
-  })
+  });
   return (
     <NavLink to={props.to} style={activeStyle}>
       {props.children}
     </NavLink>
-  )
-}
+  );
+};
 
 const S = {
   Header: styled.header`
@@ -46,4 +46,4 @@ const S = {
     display: flex;
     height: 100%;
   `,
-}
+};

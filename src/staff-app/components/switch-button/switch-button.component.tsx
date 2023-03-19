@@ -1,6 +1,6 @@
-import React from "react"
-import { Switch } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { Switch } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 
 const useStyles = makeStyles({
   root: {
@@ -47,19 +47,19 @@ const useStyles = makeStyles({
     color: "#23bf58 !important",
     transform: "translateX(62px) !important",
   },
-})
+});
 
 type PropTypes = {
-  state: boolean
-  setState: (value: boolean) => void
-}
+  state: boolean;
+  setState: (value: boolean) => void;
+};
 
 export default function Switches({ state, setState }: PropTypes) {
-  const classes = useStyles()
+  const classes = useStyles();
 
   const handleChange = (event: { target: { checked: boolean } }) => {
-    setState(event.target.checked)
-  }
+    setState(event.target.checked);
+  };
 
   return (
     <Switch
@@ -74,5 +74,5 @@ export default function Switches({ state, setState }: PropTypes) {
       onChange={handleChange}
       name="switch"
     />
-  )
+  );
 }

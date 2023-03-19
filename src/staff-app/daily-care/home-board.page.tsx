@@ -1,51 +1,61 @@
-// import Button from "@material-ui/core/ButtonBase"
-// import { useApi } from "shared/hooks/use-api"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Button from "@material-ui/core/Button"
-import ButtonGroup from "@material-ui/core/ButtonGroup"
-import IconButton from "@material-ui/core/IconButton"
-import { Images } from "assets/images"
-import React, { useEffect, useRef, useState } from "react"
-import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
-import { CenteredContainer } from "shared/components/centered-container/centered-container.component"
-import { getLimitAndOffset, searchName } from "shared/helpers/performance-utils"
-import { useAppDispatch, useAppSelector } from "shared/hooks/redux"
-import { DefaultPropTypes, Person } from "shared/models/person"
-import { Colors } from "shared/styles/colors"
-import { BorderRadius, FontWeight, Spacing } from "shared/styles/styles"
-import { /* ActiveRollAction, */ ActiveRollOverlay } from "staff-app/components/active-roll-overlay/active-roll-overlay.component"
-import Pagination from "staff-app/components/pagination/pagination.component"
-import SearchInput from "staff-app/components/search-input/search-input.component"
-import { StudentListTile } from "staff-app/components/student-list-tile/student-list-tile.component"
-import Switches from "staff-app/components/switch-button/switch-button.component"
-import styled from "styled-components"
-import { fetchStudents, getAllStudents, saveRolls, returnToState } from "./daily-care.slice"
-import ConfirmationModal from "../components/confirmation-modal/confirmation-modal"
-import ToastBar from "staff-app/components/toast-notification/toast-notification"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import IconButton from "@material-ui/core/IconButton";
+import { Images } from "assets/images";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+import { CenteredContainer } from "shared/components/centered-container/centered-container.component";
+import {
+  getLimitAndOffset,
+  searchName,
+} from "shared/helpers/performance-utils";
+import { useAppDispatch, useAppSelector } from "shared/hooks/redux";
+import { DefaultPropTypes, Person } from "shared/models/person";
+import { Colors } from "shared/styles/colors";
+import { BorderRadius, FontWeight, Spacing } from "shared/styles/styles";
+import { ActiveRollOverlay } from "staff-app/components/active-roll-overlay/active-roll-overlay.component";
+import Pagination from "staff-app/components/pagination/pagination.component";
+import SearchInput from "staff-app/components/search-input/search-input.component";
+import { StudentListTile } from "staff-app/components/student-list-tile/student-list-tile.component";
+import Switches from "staff-app/components/switch-button/switch-button.component";
+import styled from "styled-components";
+import {
+  fetchStudents,
+  getAllStudents,
+  saveRolls,
+  returnToState,
+} from "./daily-care.slice";
+import ConfirmationModal from "../components/confirmation-modal/confirmation-modal";
+import ToastBar from "staff-app/components/toast-notification/toast-notification";
 
 export const HomeBoardPage: React.FC = () => {
-  const [studentList, setStudentList] = useState<Person[]>([])
-  const [page, setPage] = useState(0)
-  const [isSearched, setIsSearched] = useState(false)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
-  const [sortBy, setSortBy] = useState("first_name")
-  const [sortOrder, setSortOrder] = useState<"asc" | "dsc">("asc")
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [allRolls, setAllRolls] = useState(0)
-  const [rollTypeFilter, setRollTypeFilter] = useState("")
-  const [modalOpen, setModalOpen] = useState(false)
-  const [tostOpen, setToastOpen] = useState(false)
+  const [studentList, setStudentList] = useState<Person[]>([]);
+  const [page, setPage] = useState(0);
+  const [isSearched, setIsSearched] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [sortBy, setSortBy] = useState("first_name");
+  const [sortOrder, setSortOrder] = useState<"asc" | "dsc">("asc");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [allRolls, setAllRolls] = useState(0);
+  const [rollTypeFilter, setRollTypeFilter] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [tostOpen, setToastOpen] = useState(false);
 
   const [tableProps, setTableProps] = useState<DefaultPropTypes>({
     limit: 0,
     offset: 11,
     sortByKey: "first_name",
     sortOrder: "asc",
-  })
+  });
 
-  const searchRef: any = useRef()
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+  const searchRef: any = useRef();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {
     counts,
@@ -53,40 +63,46 @@ export const HomeBoardPage: React.FC = () => {
     isLoading,
     hasError,
     rollsCreated: { success },
-  } = useAppSelector(getAllStudents)
+  } = useAppSelector(getAllStudents);
 
   const removeErrorParam = () => {
-    searchParams.delete("name")
-    setSearchParams(searchParams)
-  }
+    searchParams.delete("name");
+    setSearchParams(searchParams);
+  };
 
   const getInitialStates = () => {
-    setRowsPerPage(10)
-    setPage(0)
-    setSortBy("first_name")
-    setSortOrder("asc")
-  }
+    setRowsPerPage(10);
+    setPage(0);
+    setSortBy("first_name");
+    setSortOrder("asc");
+  };
 
   // FOR FETCHING INFORMATION ON LANDING & PAGINATION STATE CHANGE OR SORT ACTIVITY
   useEffect(() => {
-    const [limit, offset] = getLimitAndOffset(rowsPerPage, page)
-    const payload = { limit, offset, sortByKey: sortBy, sortOrder: sortOrder.length ? sortOrder : "asc", filter: rollTypeFilter }
-    setTableProps(payload)
-    dispatch(fetchStudents(payload))
-  }, [page, sortBy, sortOrder, rollTypeFilter, isSearched, rowsPerPage])
+    const [limit, offset] = getLimitAndOffset(rowsPerPage, page);
+    const payload = {
+      limit,
+      offset,
+      sortByKey: sortBy,
+      sortOrder: sortOrder.length ? sortOrder : "asc",
+      filter: rollTypeFilter,
+    };
+    setTableProps(payload);
+    dispatch(fetchStudents(payload));
+  }, [page, sortBy, sortOrder, rollTypeFilter, isSearched, rowsPerPage]);
 
   useEffect(() => {
     if (students && students.length) {
       if (searchRef?.current?.value) {
-        const afterSearchArr = searchName(students, searchRef?.current?.value)
-        setStudentList(afterSearchArr)
+        const afterSearchArr = searchName(students, searchRef?.current?.value);
+        setStudentList(afterSearchArr);
       } else {
-        setStudentList(students)
-        removeErrorParam()
+        setStudentList(students);
+        removeErrorParam();
       }
     }
-    setAllRolls(total)
-  }, [students])
+    setAllRolls(total);
+  }, [students]);
 
   // FOR SEARCH ACTIVITY
   const searchFn = (value: string) => {
@@ -95,44 +111,54 @@ export const HomeBoardPage: React.FC = () => {
         search: createSearchParams({
           name: value,
         }).toString(),
-      })
-      const nameListAfterSearch = searchName(studentList, value)
-      setStudentList(nameListAfterSearch)
+      });
+      const nameListAfterSearch = searchName(studentList, value);
+      setStudentList(nameListAfterSearch);
     } else {
-      removeErrorParam()
-      setIsSearched(!isSearched)
+      removeErrorParam();
+      setIsSearched(!isSearched);
     }
-  }
+  };
 
   const onToolbarAction = (action: ToolbarAction) => {
     // if (action === "roll") {
     //   setIsRollMode(true)
     // }
-  }
+  };
 
   const onActiveRollAction = (action: string) => {
-    setRollTypeFilter(action)
-    getInitialStates()
-  }
+    setRollTypeFilter(action);
+    getInitialStates();
+  };
 
   // ON SUBMIT
   const handleRollSubmission = () => {
-    dispatch(saveRolls())
-  }
+    dispatch(saveRolls());
+  };
 
   useEffect(() => {
     if (success) {
-      setModalOpen(false)
-      setToastOpen(true)
-      dispatch(returnToState({}))
+      setModalOpen(false);
+      setToastOpen(true);
+      dispatch(returnToState({}));
     }
-  }, [success])
+  }, [success]);
 
   return (
     <>
       <S.PageContainer>
-        <ConfirmationModal open={modalOpen} setOpen={setModalOpen} onAgree={handleRollSubmission} />
-        <Toolbar onSortOrderChange={setSortOrder} onSortByChange={setSortBy} searchRef={searchRef} searchFn={searchFn} onItemClick={onToolbarAction} />
+        <ConfirmationModal
+          open={modalOpen}
+          setOpen={setModalOpen}
+          onAgree={handleRollSubmission}
+        />
+        <Toolbar
+          onSortOrderChange={setSortOrder}
+          onSortByChange={setSortBy}
+          searchRef={searchRef}
+          searchFn={searchFn}
+          onItemClick={onToolbarAction}
+        />
 
         {isLoading && (
           <CenteredContainer>
@@ -151,7 +177,12 @@ export const HomeBoardPage: React.FC = () => {
               <strong>Roll</strong>
             </S.TableHeader>
             {studentList.map((s) => (
-              <StudentListTile tableProps={tableProps} key={s.id} rollMode={s.roll} student={s} />
+              <StudentListTile
+                tableProps={tableProps}
+                key={s.id}
+                rollMode={s.roll}
+                student={s}
+              />
             ))}
           </S.TableListContainer>
         )}
@@ -161,49 +192,93 @@ export const HomeBoardPage: React.FC = () => {
             <div>Failed to load</div>
           </CenteredContainer>
         )}
-        {!isLoading && <Pagination count={counts.total} page={page} setPage={setPage} rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} />}
+        {!isLoading && (
+          <Pagination
+            count={counts.total}
+            page={page}
+            setPage={setPage}
+            rowsPerPage={rowsPerPage}
+            setRowsPerPage={setRowsPerPage}
+          />
+        )}
       </S.PageContainer>
 
-      <ActiveRollOverlay setModalOpen={setModalOpen} selectedRollType={rollTypeFilter} counts={counts} allRolls={allRolls} isActive={true} onItemClick={onActiveRollAction} />
+      <ActiveRollOverlay
+        setModalOpen={setModalOpen}
+        selectedRollType={rollTypeFilter}
+        counts={counts}
+        allRolls={allRolls}
+        isActive={true}
+        onItemClick={onActiveRollAction}
+      />
       <ToastBar open={tostOpen} setOpen={setToastOpen} />
     </>
-  )
-}
+  );
+};
 
-type ToolbarAction = "roll" | "sort"
+type ToolbarAction = "roll" | "sort";
 interface ToolbarProps {
-  onItemClick: (action: ToolbarAction, value?: string) => void
-  searchFn: (value: string) => void
-  onSortByChange: (value: any) => void
-  onSortOrderChange: (value: any) => void
-  searchRef: any
+  onItemClick: (action: ToolbarAction, value?: string) => void;
+  searchFn: (value: string) => void;
+  onSortByChange: (value: any) => void;
+  onSortOrderChange: (value: any) => void;
+  searchRef: any;
 }
 
 const Toolbar: React.FC<ToolbarProps> = (props) => {
-  const { onSortOrderChange, onSortByChange, searchRef, searchFn, onItemClick } = props
-  const [sortBy, setSortBy] = useState(true)
-  const [sortOrder, setSortOrder] = useState("")
+  const {
+    onSortOrderChange,
+    onSortByChange,
+    searchRef,
+    searchFn,
+    onItemClick,
+  } = props;
+  const [sortBy, setSortBy] = useState(true);
+  const [sortOrder, setSortOrder] = useState("");
 
   useEffect(() => {
     if (sortBy) {
-      onSortByChange("first_name")
+      onSortByChange("first_name");
     } else {
-      onSortByChange("last_name")
+      onSortByChange("last_name");
     }
-    onSortOrderChange(sortOrder)
-  }, [sortBy, sortOrder])
+    onSortOrderChange(sortOrder);
+  }, [sortBy, sortOrder]);
 
   return (
     <S.ToolbarContainer>
       <S.SortContainer>
-        <Switches state={sortBy} setState={(value: boolean) => setSortBy(value)} />
+        <Switches
+          state={sortBy}
+          setState={(value: boolean) => setSortBy(value)}
+        />
         <>
           <ButtonGroup orientation="vertical" color="primary">
-            <S.IconButton onClick={() => setSortOrder("asc")} style={{ backgroundColor: sortOrder === "asc" ? "#fff" : Colors.blue.base }} color="secondary">
-              <img src={sortOrder !== "asc" ? Images.asc : Images.ascDark} width={30} />
+            <S.IconButton
+              onClick={() => setSortOrder("asc")}
+              style={{
+                backgroundColor:
+                  sortOrder === "asc" ? "#fff" : Colors.blue.base,
+              }}
+              color="secondary"
+            >
+              <img
+                src={sortOrder !== "asc" ? Images.asc : Images.ascDark}
+                width={30}
+              />
             </S.IconButton>
-            <S.IconButton onClick={() => setSortOrder("dsc")} style={{ backgroundColor: sortOrder === "dsc" ? "#fff" : Colors.blue.base }} color="primary">
-              <img src={sortOrder !== "dsc" ? Images.dsc : Images.dscDark} width={30} />
+            <S.IconButton
+              onClick={() => setSortOrder("dsc")}
+              style={{
+                backgroundColor:
+                  sortOrder === "dsc" ? "#fff" : Colors.blue.base,
+              }}
+              color="primary"
+            >
+              <img
+                src={sortOrder !== "dsc" ? Images.dsc : Images.dscDark}
+                width={30}
+              />
             </S.IconButton>
           </ButtonGroup>
         </>
@@ -213,8 +288,8 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
       </div>
       <S.Button onClick={() => onItemClick("roll")}>Start Roll</S.Button>
     </S.ToolbarContainer>
-  )
-}
+  );
+};
 
 const S = {
   PageContainer: styled.div`
@@ -286,4 +361,4 @@ const S = {
       margin: 0 10.5%;
     }
   `,
-}
+};

@@ -1,8 +1,8 @@
-import React from "react"
-import styled from "styled-components"
-import { Colors } from "shared/styles/colors"
-import { Images } from "assets/images"
-import { Avatar } from "@material-ui/core"
+import { Avatar } from "@material-ui/core";
+import { Images } from "assets/images";
+import React from "react";
+import { Colors } from "shared/styles/colors";
+import styled from "styled-components";
 
 export const Footer: React.FC = () => {
   return (
@@ -11,7 +11,10 @@ export const Footer: React.FC = () => {
         <S.FooterItemContent>
           <h1>Project</h1>
           <a href="/">Docs</a>
-          <a target="_blank" href="https://github.com/BoardingwareLtd/orah-engineering-test/tree/main/front-end">
+          <a
+            target="_blank"
+            href="https://github.com/BoardingwareLtd/orah-engineering-test/tree/main/front-end"
+          >
             Github
           </a>
           <a target="_blank" href="https://www.orah.com/">
@@ -19,7 +22,15 @@ export const Footer: React.FC = () => {
           </a>
         </S.FooterItemContent>
         <S.FooterItemContent style={{ justifyContent: "center" }}>
-          <Avatar style={{ width: 100, height: 100, border: "3.3px solid", padding: 3 }} src={Images.logo} />
+          <Avatar
+            style={{
+              width: 100,
+              height: 100,
+              border: "3.3px solid",
+              padding: 3,
+            }}
+            src={Images.logo}
+          />
         </S.FooterItemContent>
         <S.FooterItemContent>
           <h1>Author</h1>
@@ -29,7 +40,10 @@ export const Footer: React.FC = () => {
           <a target="_blank" href="https://hashnode.com/@iJustCode">
             Blog
           </a>
-          <a target="_blank" href="https://www.linkedin.com/in/rajat-pratap-singh-sse/">
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/in/rajat-pratap-singh-sse/"
+          >
             Linkedin
           </a>
           <a href="mailto:pratapsinghr2016@gmail.com">Email</a>
@@ -37,8 +51,8 @@ export const Footer: React.FC = () => {
         </S.FooterItemContent>
       </S.FooterItem>
     </S.Footer>
-  )
-}
+  );
+};
 
 const S = {
   Footer: styled.footer`
@@ -74,4 +88,4 @@ const S = {
       color: #072744;
     }
   `,
-}
+};
