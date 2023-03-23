@@ -7,6 +7,7 @@ export interface Person {
   first_name: string;
   last_name: string;
   photo_url?: string;
+  last_update: string;
   roll: string;
 }
 

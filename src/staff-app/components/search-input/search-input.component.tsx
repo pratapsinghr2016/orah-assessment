@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       padding: "2px 4px",
       display: "flex",
+      width: "100%",
       alignItems: "center",
-      minWidth: 350,
     },
     input: {
       marginLeft: theme.spacing(1),
@@ -31,16 +31,23 @@ const useStyles = makeStyles((theme: Theme) =>
 type SearchInputPropTypes = {
   searchFn: (value: string) => void;
   searchRef: any;
+  width: number;
 };
 
 export default function SearchInput(props: SearchInputPropTypes) {
   const classes = useStyles();
-  const { searchRef, searchFn } = props;
+  const { width, searchRef, searchFn } = props;
 
   const inputChangeHandler = debounce(searchFn);
 
   return (
-    <Paper component="form" className={classes.root}>
+    <Paper
+      component="form"
+      className={classes.root}
+      style={{
+        width,
+      }}
+    >
       <InputBase
         inputRef={searchRef}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

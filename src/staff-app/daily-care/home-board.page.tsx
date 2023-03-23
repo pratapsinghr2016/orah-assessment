@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import Fab from "@material-ui/core/Fab";
 import IconButton from "@material-ui/core/IconButton";
 import { Images } from "assets/images";
 import React, { useEffect, useRef, useState } from "react";
@@ -14,24 +14,26 @@ import {
   getLimitAndOffset,
   searchName,
 } from "shared/helpers/performance-utils";
+
 import { useAppDispatch, useAppSelector } from "shared/hooks/redux";
 import { DefaultPropTypes, Person } from "shared/models/person";
 import { Colors } from "shared/styles/colors";
-import { BorderRadius, FontWeight, Spacing } from "shared/styles/styles";
+import { BorderRadius, FontWeight } from "shared/styles/styles";
 import { ActiveRollOverlay } from "staff-app/components/active-roll-overlay/active-roll-overlay.component";
+import { MobileViewList } from "staff-app/components/mobile-view-card/mobile-view-card";
 import Pagination from "staff-app/components/pagination/pagination.component";
 import SearchInput from "staff-app/components/search-input/search-input.component";
 import { StudentListTile } from "staff-app/components/student-list-tile/student-list-tile.component";
 import Switches from "staff-app/components/switch-button/switch-button.component";
+import ToastBar from "staff-app/components/toast-notification/toast-notification";
 import styled from "styled-components";
+import ConfirmationModal from "../components/confirmation-modal/confirmation-modal";
 import {
   fetchStudents,
   getAllStudents,
-  saveRolls,
   returnToState,
+  saveRolls,
 } from "./daily-care.slice";
-import ConfirmationModal from "../components/confirmation-modal/confirmation-modal";
-import ToastBar from "staff-app/components/toast-notification/toast-notification";
 
 export const HomeBoardPage: React.FC = () => {
   const [studentList, setStudentList] = useState<Person[]>([]);
@@ -174,10 +176,24 @@ export const HomeBoardPage: React.FC = () => {
               <strong>Student</strong>
               <strong>Parent</strong>
               <strong>Grade</strong>
+              <strong>Last Update</strong>
               <strong>Roll</strong>
             </S.TableHeader>
+
+            {/* BIG SCREEN */}
+            <S.ListContainer>
+              {studentList.map((s) => (
+                <StudentListTile
+                  tableProps={tableProps}
+                  key={s.id}
+                  rollMode={s.roll}
+                  student={s}
+                />
+              ))}
+            </S.ListContainer>
+            {/* SMALL SCREEN */}
             {studentList.map((s) => (
-              <StudentListTile
+              <MobileViewList
                 tableProps={tableProps}
                 key={s.id}
                 rollMode={s.roll}
@@ -247,69 +263,119 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
 
   return (
     <S.ToolbarContainer>
-      <S.SortContainer>
-        <Switches
-          state={sortBy}
-          setState={(value: boolean) => setSortBy(value)}
-        />
-        <>
-          <ButtonGroup orientation="vertical" color="primary">
-            <S.IconButton
-              onClick={() => setSortOrder("asc")}
-              style={{
-                backgroundColor:
-                  sortOrder === "asc" ? "#fff" : Colors.blue.base,
-              }}
-              color="secondary"
-            >
-              <img
-                src={sortOrder !== "asc" ? Images.asc : Images.ascDark}
-                width={30}
-              />
-            </S.IconButton>
-            <S.IconButton
-              onClick={() => setSortOrder("dsc")}
-              style={{
-                backgroundColor:
-                  sortOrder === "dsc" ? "#fff" : Colors.blue.base,
-              }}
-              color="primary"
-            >
-              <img
-                src={sortOrder !== "dsc" ? Images.dsc : Images.dscDark}
-                width={30}
-              />
-            </S.IconButton>
-          </ButtonGroup>
-        </>
-      </S.SortContainer>
       <div>
-        <SearchInput searchRef={searchRef} searchFn={searchFn} />
+        <S.SortContainer>
+          <Switches
+            state={sortBy}
+            setState={(value: boolean) => setSortBy(value)}
+          />
+          <>
+            <ButtonGroup orientation="vertical" color="primary">
+              <S.IconButton
+                onClick={() => setSortOrder("asc")}
+                style={{
+                  backgroundColor:
+                    sortOrder === "asc" ? "#fff" : Colors.blue.base,
+                }}
+                color="secondary"
+              >
+                <img
+                  src={sortOrder !== "asc" ? Images.asc : Images.ascDark}
+                  width={30}
+                />
+              </S.IconButton>
+              <S.IconButton
+                onClick={() => setSortOrder("dsc")}
+                style={{
+                  backgroundColor:
+                    sortOrder === "dsc" ? "#fff" : Colors.blue.base,
+                }}
+                color="primary"
+              >
+                <img
+                  src={sortOrder !== "dsc" ? Images.dsc : Images.dscDark}
+                  width={30}
+                />
+              </S.IconButton>
+            </ButtonGroup>
+          </>
+        </S.SortContainer>
+        <section>
+          <SearchInput width={315} searchRef={searchRef} searchFn={searchFn} />
+        </section>
+        <span
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: 0,
+          }}
+        >
+          <S.Button size="small" onClick={() => onItemClick("roll")}>
+            M
+          </S.Button>
+          <small>Mark all</small>
+        </span>
       </div>
-      <S.Button onClick={() => onItemClick("roll")}>Start Roll</S.Button>
+      <section>
+        <SearchInput width={300} searchRef={searchRef} searchFn={searchFn} />
+      </section>
     </S.ToolbarContainer>
   );
 };
 
 const S = {
   PageContainer: styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    min-height: 100vh;
-    margin: ${Spacing.u4} auto 140px;
+    margin: auto;
+    width: 70vw;
+    @media (max-width: 850px) {
+      width: 90vw;
+    }
   `,
   ToolbarContainer: styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-    justify-content: space-between;
-    align-items: center;
     color: #fff;
-    background-color: ${Colors.gray.light};
+    display: flex;
     padding: 6px 14px;
+    flex-direction: column;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: ${Colors.gray.light};
     font-weight: ${FontWeight.strong};
     border-radius: ${BorderRadius.default};
+    > div {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      > span {
+        > small {
+          @media (min-width: 700px) {
+            display: block;
+          }
+          @media (min-width: 300px) and (max-width: 680px) {
+            display: none;
+          }
+        }
+      }
+      > section {
+        @media (min-width: 700px) {
+          display: block;
+        }
+        @media (min-width: 300px) and (max-width: 680px) {
+          display: none;
+        }
+      }
+    }
+    > section {
+      @media (min-width: 700px) {
+        display: none;
+      }
+      @media (min-width: 300px) and (max-width: 680px) {
+        display: block;
+        width: 100%;
+      }
+    }
   `,
   SpinnerContainer: styled.div`
     display: flex;
@@ -320,14 +386,13 @@ const S = {
   TableListContainer: styled.div`
     min-height: 100vh;
   `,
-  Button: styled(Button)`
+  Button: styled(Fab)`
     && {
       color: #fff;
       background-color: ${Colors.blue.base};
       border: 2px solid ${Colors.blue.base};
-      padding: ${Spacing.u2};
+      margin: 5px 12px;
       font-weight: ${FontWeight.strong};
-      border-radius: ${BorderRadius.arc};
       :hover {
         background-color: #fff;
         color: ${Colors.gray.light};
@@ -358,7 +423,18 @@ const S = {
     justify-content: space-between;
     > strong {
       text-align: center;
-      margin: 0 10.5%;
+      margin: 0 2rem;
+    }
+    @media (max-width: 768px) {
+      display: none;
+    }
+  `,
+  ListContainer: styled.div`
+    @media (min-width: 700px) {
+      display: block;
+    }
+    @media (min-width: 300px) and (max-width: 650px) {
+      display: none;
     }
   `,
 };

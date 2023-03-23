@@ -98,7 +98,7 @@ const S = {
     background-color: #fff;
     padding: 5px;
     display: flex;
-    min-width: 350px;
+    width: 22.5rem;
     align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
@@ -123,6 +123,10 @@ const S = {
     background-size: cover;
     background-position: 50%;
     align-self: center;
+    @media (min-width: 300px) and (max-width: 680px) {
+      width: 5rem;
+      height: 5rem;
+    }
   `,
   Title: styled.strong`
     font-weight: 600;

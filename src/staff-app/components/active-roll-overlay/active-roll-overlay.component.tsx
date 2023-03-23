@@ -26,19 +26,18 @@ export const ActiveRollOverlay: React.FC<Props> = (props) => {
 
   return (
     <S.Content>
-      <div>
-        <RollStateList
-          stateList={[
-            { type: "all", count: counts.total },
-            { type: "present", count: counts.present },
-            { type: "late", count: counts.late },
-            { type: "absent", count: counts.absent },
-            { type: "un-rolled", count: counts.unRolled },
-          ]}
-          onItemClick={onItemClick}
-          selectedRollType={selectedRollType}
-        />
-      </div>
+      <RollStateList
+        stateList={[
+          { type: "all", count: counts.total },
+          { type: "present", count: counts.present },
+          { type: "late", count: counts.late },
+          { type: "absent", count: counts.absent },
+          { type: "un-rolled", count: counts.unRolled },
+        ]}
+        onItemClick={onItemClick}
+        selectedRollType={selectedRollType}
+      />
+
       <S.ActionContainer>
         <S.Button onClick={() => onItemClick("")}>Reset</S.Button>
         <S.Button onClick={() => setModalOpen(true)}>Complete</S.Button>
@@ -48,27 +47,28 @@ export const ActiveRollOverlay: React.FC<Props> = (props) => {
 };
 
 const S = {
-  Overlay: styled.div<{ isActive: boolean }>`
-    height: ${({ isActive }) => (isActive ? "120px" : 0)};
-  `,
   Content: styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 50%;
     color: #fff;
     min-height: 145px;
     background-color: ${Colors.gray.light};
-    margin: -90px auto 0;
+    margin: auto;
     border: 6.7px solid ${Colors.blue.base};
     border-radius: ${BorderRadius.default};
     padding: 16px 0px 0px 0px;
+    width: 70vw;
+    @media (max-width: 850px) {
+      width: 90vw;
+    }
   `,
   ActionContainer: styled.div`
     display: flex;
     width: 100%;
     padding: 0;
+    margin-top: 8px;
   `,
   Button: styled(Button)`
     width: 50%;

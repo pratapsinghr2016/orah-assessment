@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 const S = {
   Section: styled.section`
-    padding: 0.5rem 10rem;
+    margin: auto;
+    padding: 0 1rem;
     max-width: 100vw;
     font-size: 1rem;
     color: #333;

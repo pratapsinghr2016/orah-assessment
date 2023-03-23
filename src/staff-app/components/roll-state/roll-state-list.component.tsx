@@ -68,6 +68,8 @@ export const RollStateList: React.FC<Props> = ({
 const S = {
   ListContainer: styled.div`
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
   `,
   ListItem: styled.div`
@@ -77,7 +79,7 @@ const S = {
     justify-content: center;
     margin-right: ${Spacing.u4};
     p {
-      font-weight: ${FontWeight.strong};
+      font-weight: ${FontWeight.mediumStrong};
       margin-left: ${Spacing.u2};
     }
     strong {

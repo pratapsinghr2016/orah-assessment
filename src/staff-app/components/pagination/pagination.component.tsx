@@ -33,7 +33,7 @@ export default function Pagination({
   };
 
   return (
-    <div>
+    <>
       <TablePagination
         component="div"
         count={count}
@@ -41,7 +41,8 @@ export default function Pagination({
         page={page}
         rowsPerPage={rowsPerPage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
+        style={{ margin: "20px 2px" }}
       />
-    </div>
+    </>
   );
 }

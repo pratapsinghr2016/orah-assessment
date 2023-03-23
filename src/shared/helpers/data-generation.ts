@@ -1,4 +1,8 @@
-import { generateRange, getRandomInt } from "shared/helpers/math-utils";
+import {
+  generateRange,
+  getRandomInt,
+  getNowTime,
+} from "shared/helpers/math-utils";
 import { sortBy } from "shared/helpers/performance-utils";
 
 const nameTokens = [
@@ -49,11 +53,11 @@ export function generateStudent(id: number) {
       parentNameTokens[getRandomInt(0, nameTokens.length - 1)],
     grade: grade[getRandomInt(0, grade.length - 1)],
     roll: "un-rolled",
+    last_update: getNowTime(new Date()),
   };
 }
 
 export function generateStudents(number: number) {
-  console.log("itemInStore1111");
   const studentList = generateRange(number).map((_, id) =>
     generateStudent(id + 1)
   );

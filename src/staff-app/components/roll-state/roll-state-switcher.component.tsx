@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getNowTime } from "shared/helpers/math-utils";
 import { useAppDispatch } from "shared/hooks/redux";
 import { DefaultPropTypes, Person } from "shared/models/person";
 import { RollStateIcon } from "staff-app/components/roll-state/roll-state-icon.component";
@@ -9,6 +10,7 @@ interface Props {
   studentDetail: Person;
   rollMode: string;
   tableProps: DefaultPropTypes;
+  setDateTime: (val: string) => void;
 }
 
 const rollStates = ["un-rolled", "present", "late", "absent"];
@@ -20,6 +22,7 @@ export const RollStateSwitcher: React.FC<Props> = ({
   size = 40,
   studentDetail,
   tableProps,
+  setDateTime,
 }) => {
   const [rollIdx, setRollState] = useState<number>(getIdx(rollMode));
 
@@ -34,8 +37,11 @@ export const RollStateSwitcher: React.FC<Props> = ({
       tempValue += 1;
     }
 
+    const dateTime = getNowTime(new Date());
+    setDateTime(dateTime);
     const targetStudent = {
       ...studentDetail,
+      last_update: dateTime,
       roll: rollStates[tempValue],
     };
 
