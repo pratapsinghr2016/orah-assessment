@@ -21,4 +21,4 @@ export const Colors = {
   gray: {
     light: "#9c9fab",
   },
-}
+};

@@ -1,5 +1,5 @@
 export interface Roll {
-  id: number
-  first_name: string
+  id: number;
+  first_name: string;
   // completed_at: Date
 }

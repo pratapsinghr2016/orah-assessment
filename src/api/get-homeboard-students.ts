@@ -1,10 +1,10 @@
 import { generateStudents } from "shared/helpers/data-generation";
 import { httpMock } from "shared/helpers/http-mock";
 import {
-  addIfNotExist,
   LocalStorageKey,
-  get,
   add,
+  addIfNotExist,
+  get,
 } from "shared/helpers/local-storage";
 import { sortBy } from "shared/helpers/performance-utils";
 import { Person } from "shared/models/person";
